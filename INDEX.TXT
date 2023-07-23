@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auto Video Creator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: #fff;
+            overflow: hidden; /* Hide overflow to prevent scrollbars */
+        }
+
+        header {
+            background-color: #222;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        #menu-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .menu-item {
+            padding: 20px 40px;
+            margin: 10px;
+            font-size: 24px;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background-color: #444;
+        }
+
+        /* CSS for the video */
+        #background-video {
+            position: fixed;
+            top: -400px;
+            left: -372px;
+            width: 150%;
+            height: 200%;
+            z-index: -1;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Video -->
+    <video id="background-video" autoplay loop muted>
+        <source src="background-video.mp4" type="video/mp4">
+        <!-- Add more video formats (WebM, Ogg) for better browser compatibility -->
+    </video>
+
+    <header>
+        <h1>AI VIDEO</h1>
+    </header>
+    <div id="menu-container">
+        <a href="#" id="callMultipleWebsites" class="menu-item">Create videos</a>
+        <div id="websiteContainer">
+            <!-- The iframes will be added here -->
+        </div>
+    </div>
+  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Function to load websites in iframes
+        function loadWebsites() {
+            // Array of URLs to load
+            var websites = [
+                'https://www.example.com',
+                'https://www.google.com',
+                'https://www.wikipedia.org',
+                'https://www.example.com',
+                // Add more websites here if needed
+            ];
+
+            var container = $('#websiteContainer');
+
+            // Clear any previous iframes
+            container.empty();
+
+            // Load each URL in separate iframes
+            websites.forEach(function (url) {
+                var iframe = $('<iframe></iframe>').attr('src', url);
+                container.append(iframe);
+            });
+        }
+
+        // Attach the function to the button click event
+        $(document).ready(function () {
+            $('#callMultipleWebsites').on('click', loadWebsites);
+        });
+
+        // Start playing the video when the page loads
+        $(window).on('load', function () {
+            var video = document.getElementById('background-video');
+            video.play();
+        });
+    </script>
+</body>
+</html>
